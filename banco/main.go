@@ -27,6 +27,15 @@ func (c *ContaCorrente) Depositar(valorDoDeposito float64) (string, float64) {
 	return "Depósito inválido", c.saldo
 }
 
+func (c *ContaCorrente) Transferir(valorDaTransferencia float64, contaDestino ContaCorrente) string {
+	if valorDaTransferencia > 0 && valorDaTransferencia < c.saldo {
+		c.saldo -= valorDaTransferencia
+		contaDestino.Depositar(valorDaTransferencia)
+		return "Transferência efetuada com sucesso"
+	}
+	return "Transferência inválida"
+}
+
 func main() {
 	contaDoDouglas := ContaCorrente{
 		titular:     "Douglas",
@@ -120,6 +129,9 @@ func main() {
 	fmt.Println(status, valor)
 	fmt.Println("Saldo depois do depósito:", contaDoRoberto.saldo)
 
+	contaDoRoberto.Transferir(300, contaDoDouglas)
+	fmt.Println("Saldo Conta Origem:", contaDoRoberto.saldo)
+	fmt.Println("Saldo Conta Destino:", contaDoDouglas.saldo)
 	// ################## Varidic functions ######################
 
 	fmt.Println("Resultado da Varidic Function: ", Somando(1, 4, 32, 54, 7, 4, 2, 277))
