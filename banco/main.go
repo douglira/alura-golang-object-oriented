@@ -108,4 +108,16 @@ func main() {
 	fmt.Println("Saldo antes do saque:", contaDoRoberto.saldo)
 	fmt.Println(contaDoRoberto.Sacar(valorDoSaque))
 	fmt.Println("Saldo depois do saque:", contaDoRoberto.saldo)
+
+	// ################## Varidic functions ######################
+
+	fmt.Println("Resultado da Varidic Function: ", Somando(1, 4, 32, 54, 7, 4, 2, 277))
+}
+
+func Somando(numeros ...int) int {
+	resultadoDaSoma := 0
+	for _, numero := range numeros {
+		resultadoDaSoma += numero
+	}
+	return resultadoDaSoma
 }
