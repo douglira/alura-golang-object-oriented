@@ -19,6 +19,14 @@ func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
 	return "Saldo insuficiente"
 }
 
+func (c *ContaCorrente) Depositar(valorDoDeposito float64) (string, float64) {
+	if valorDoDeposito > 0 {
+		c.saldo += valorDoDeposito
+		return "Depósito efetuado com sucesso", c.saldo
+	}
+	return "Depósito inválido", c.saldo
+}
+
 func main() {
 	contaDoDouglas := ContaCorrente{
 		titular:     "Douglas",
@@ -108,6 +116,9 @@ func main() {
 	fmt.Println("Saldo antes do saque:", contaDoRoberto.saldo)
 	fmt.Println(contaDoRoberto.Sacar(valorDoSaque))
 	fmt.Println("Saldo depois do saque:", contaDoRoberto.saldo)
+	status, valor := contaDoRoberto.Depositar(775)
+	fmt.Println(status, valor)
+	fmt.Println("Saldo depois do depósito:", contaDoRoberto.saldo)
 
 	// ################## Varidic functions ######################
 
