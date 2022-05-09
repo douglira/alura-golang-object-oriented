@@ -9,6 +9,16 @@ type ContaCorrente struct {
 	saldo       float64
 }
 
+func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
+	podeSacar := valorDoSaque > 0 && valorDoSaque <= c.saldo
+	if podeSacar {
+		c.saldo -= valorDoSaque
+		return "Saque realizado com sucesso"
+	}
+
+	return "Saldo insuficiente"
+}
+
 func main() {
 	contaDoDouglas := ContaCorrente{
 		titular:     "Douglas",
@@ -85,4 +95,17 @@ func main() {
 		TRUE: Desta forma é comparado o valor do struct que são iguais
 	*/
 	fmt.Println(*contaDoPedro == *contaDoPedro2) // true
+
+	// ######################## Método do struct #####################
+
+	contaDoRoberto := ContaCorrente{}
+	contaDoRoberto.titular = "Roberto"
+	contaDoRoberto.saldo = 500
+
+	// var valorDoSaque float = 200
+	valorDoSaque := 200.
+
+	fmt.Println("Saldo antes do saque:", contaDoRoberto.saldo)
+	fmt.Println(contaDoRoberto.Sacar(valorDoSaque))
+	fmt.Println("Saldo depois do saque:", contaDoRoberto.saldo)
 }
