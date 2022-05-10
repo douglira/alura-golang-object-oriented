@@ -1,11 +1,41 @@
 package main
 
 import (
+	"alura/2-orientacao-objetos/banco/clientes"
 	"alura/2-orientacao-objetos/banco/contas"
-	utilitarios "alura/2-orientacao-objetos/banco/utils"
 	"fmt"
+	// utilitarios "alura/2-orientacao-objetos/banco/utils"
 )
 
+type verificarConta interface {
+	Sacar(valor float64) string
+}
+
+func PagarBoleto(conta verificarConta, valorDoBoleto float64) {
+	conta.Sacar(valorDoBoleto)
+}
+
+func main() {
+	contaDoDouglas := contas.ContaCorrente{
+		Titular: clientes.Titular{
+			Nome:            "Douglas Lira",
+			NumeroDocumento: "23443256789",
+			Profissao:       "Software Engineer",
+		},
+		Agencia:     589,
+		NumeroConta: 124578,
+	}
+
+	contaDoDouglas.Depositar(11500)
+
+	fmt.Println(contaDoDouglas.ObterSaldo())
+
+	PagarBoleto(&contaDoDouglas, 2200)
+
+	fmt.Println(contaDoDouglas.ObterSaldo())
+}
+
+/*
 func main() {
 	contaDoDouglas := contas.ContaCorrente{
 		Titular:     "Douglas",
@@ -50,14 +80,11 @@ func main() {
 		NumeroConta: 326598,
 	}
 
-	/*
-		TRUE: Pois o conteúdo do struct é igual
-	*/
+	// TRUE: Pois o conteúdo do struct é igual
 	fmt.Println(contaDoAlexandre == contaDoAlexandre2) // true
 	contaDoAlexandre.Saldo = 10
-	/*
-		FALSE: Pois um valor do struct é diferente do outro
-	*/
+
+	// FALSE: Pois um valor do struct é diferente do outro
 	fmt.Println(contaDoAlexandre == contaDoAlexandre2) // false
 
 	var contaDoPedro *contas.ContaCorrente
@@ -73,14 +100,10 @@ func main() {
 	contaDoPedro2.NumeroConta = 852963
 	contaDoPedro2.Saldo = 250
 
-	/*
-		FALSE: Pois o ponteiro de memória de ambas são diferente
-		mesmo possuindo o mesmo valor do struct
-	*/
+	// FALSE: Pois o ponteiro de memória de ambas são diferente mesmo possuindo o mesmo valor do struct
 	fmt.Println(contaDoPedro == contaDoPedro2) // false
-	/*
-		TRUE: Desta forma é comparado o valor do struct que são iguais
-	*/
+
+	// TRUE: Desta forma é comparado o valor do struct que são iguais
 	fmt.Println(*contaDoPedro == *contaDoPedro2) // true
 
 	// ######################## Método do struct #####################
@@ -107,3 +130,4 @@ func main() {
 
 	fmt.Println("Resultado da Varidic Function: ", utilitarios.Somando(1, 4, 32, 54, 7, 4, 2, 277))
 }
+*/
